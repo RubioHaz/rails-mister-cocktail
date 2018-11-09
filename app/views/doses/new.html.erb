@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Create a dose for <%= @cocktail.name %></h1>
+
+  <%= simple_form_for [@cocktail, @dose], wrapper: :inline_form, html: { class: 'form-inline form-group-lg' } do |f| %>
+    <%= f.input :description, size: '100' %>
+    <%= f.association :ingredient %>
+    <%= f.button :submit, 'Create!', class: 'btn btn-primary btn-lg' %>
+  <% end %>
+
+  <hr>
+  <p>
+    <%= link_to 'home', cocktails_path %> |
+    <%= link_to "back to #{@cocktail.name}", cocktail_path(@cocktail) %>
+  </p>
+</div>

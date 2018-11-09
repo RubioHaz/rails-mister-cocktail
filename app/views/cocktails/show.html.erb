@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>
+    <%= @cocktail.name %>
+  </h1>
+  <h5>
+    <img src="<%= @cocktail.picture %>" alt="<%= @cocktail.name %>" width=300px>
+  </h5>
+
+  <p>
+    <%= @cocktail.description %>
+  </p>
+      <table class="table table-sm table-dark table-bordered th-dark table-striped">
+        <thead>
+          <tr>
+            <th>
+              name
+            </th>
+            <th>
+              description
+            </th>
+            <th class='text-center'>
+              delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @doses.each do |dose| %>
+          <% @ingredient = Ingredient.find(dose.ingredient_id) %>
+          <tr>
+            <td>
+              <%= @ingredient.name %>
+            </td>
+            <td>
+              <%= dose.description %>
+            </td>
+            <td class='text-center'>
+              <%= link_to icon('fas', 'trash-alt'), dose_path(dose), class: 'text-danger',
+                method: :delete,
+                data: { confirm: "Are you sure?", class: "fade" } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%= link_to 'add an ingredient', new_cocktail_dose_path(@cocktail) %>
+  <hr>
+  <p>
+    <%= link_to 'home', cocktails_path %>
+  </p>
+</div>

@@ -1,2 +1,0 @@
-class Sandwich < ApplicationRecord
-end

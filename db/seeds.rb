@@ -5,3 +5,46 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+
+puts 'Clearing old ingredients from database...'
+Ingredient.destroy_all
+
+puts 'Creating new ingredients...'
+
+url = 'http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+list = open(url).read
+ingredients_hash = JSON.parse(list)
+ingredients_array = ingredients_hash['drinks']
+(0...ingredients_array.size).to_a.each do |index|
+  ingredient_hash = ingredients_array[index]
+  ingredient = ingredient_hash['strIngredient1']
+  Ingredient.create(name: ingredient)
+end
+
+puts 'Finished creating new ingredients. Enjoy!'
+
+
+puts 'Clearing old cocktails from database...'
+Cocktail.destroy_all
+
+puts 'Creating non-alcoholic cocktails...'
+
+url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
+list = open(url).read
+cocktails_hash = JSON.parse(list)
+cocktails_array = cocktails_hash['drinks']
+(0...cocktails_array.size).to_a.each do |index|
+  cocktail_hash = cocktails_array[index]
+  cocktail = cocktail_hash['strDrink']
+  cocktail_pic = cocktail_hash['strDrinkThumb']
+  url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+  list = open(url).read
+  descriptions_hash = JSON.parse(list)
+  descriptions_array = descriptions_hash['drinks']
+  description_hash = descriptions_array[0]
+  description = description_hash['strInstructions']
+  Cocktail.create(name: cocktail, picture: cocktail_pic, description: description)
+end
+puts 'Finished creating non-alcoholic cocktails. Enjoy!'
+

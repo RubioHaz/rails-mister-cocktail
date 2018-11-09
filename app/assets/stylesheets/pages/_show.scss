@@ -1,0 +1,21 @@
+.photo-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-div {
+  padding: 10px;
+  &.photo {
+    flex: 1 0 100%;
+  }
+  &.description {
+    background-color: #eee;
+    border-radius: 10px;
+    flex: 0 1 40%;
+  }
+  &.table {
+    margin: 10px 0 0 !important;
+    font-size: 16px;
+    flex: 0 1 45%;
+  }
+}

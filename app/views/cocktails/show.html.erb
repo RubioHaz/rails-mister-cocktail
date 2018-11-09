@@ -2,13 +2,22 @@
   <h1>
     <%= @cocktail.name %>
   </h1>
-  <h5>
-    <img src="<%= @cocktail.picture %>" alt="<%= @cocktail.name %>" width=300px>
-  </h5>
-
-  <p>
-    <%= @cocktail.description %>
-  </p>
+  <div class="photo-table">
+    <div class='photo flex-id' style="
+      background-image: url('<%= @cocktail.picture %>');
+      width: 300px;
+      height: 250px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      border-radius: 10px;
+      margin-right: 10px;
+    ">
+    </div>
+    <div class='description flex-div'>
+      <%= @cocktail.description %>
+    </div>
+    <div class='table flex-div'>
       <table class="table table-sm table-dark table-bordered th-dark table-striped">
         <thead>
           <tr>
@@ -42,7 +51,9 @@
           <% end %>
         </tbody>
       </table>
-    <%= link_to 'add an ingredient', new_cocktail_dose_path(@cocktail) %>
+      <%= link_to 'add an ingredient', new_cocktail_dose_path(@cocktail) %>
+    </div>
+  </div>
   <hr>
   <p>
     <%= link_to 'home', cocktails_path %>

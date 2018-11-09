@@ -1,7 +1,7 @@
 <div class="container">
 <h1>Create a new cocktail</h1>
-  <%= simple_form_for @cocktail do |f| %>
-    <%= f.input :name %>
+  <%= simple_form_for @cocktail, wrapper: :inline_form, html: { class: 'form-inline form-group-lg' } do |f| %>
+    <%= f.input :name, class: 'input' %>
     <%= f.submit 'Create a cocktail', class: 'btn btn-primary btn-lg' %>
   <% end %>
   <hr>

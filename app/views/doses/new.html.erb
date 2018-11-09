@@ -2,7 +2,7 @@
   <h1>Create a dose for <%= @cocktail.name %></h1>
 
   <%= simple_form_for [@cocktail, @dose], wrapper: :inline_form, html: { class: 'form-inline form-group-lg' } do |f| %>
-    <%= f.input :description, size: '100' %>
+    <%= f.input :description, class: 'input' %>
     <%= f.association :ingredient %>
     <%= f.button :submit, 'Create!', class: 'btn btn-primary btn-lg' %>
   <% end %>

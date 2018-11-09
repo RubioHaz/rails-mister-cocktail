@@ -7,7 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
 
+
 puts 'Clearing old ingredients from database...'
+Dose.destroy_all
 Ingredient.destroy_all
 
 puts 'Creating new ingredients...'
@@ -38,13 +40,16 @@ cocktails_array = cocktails_hash['drinks']
   cocktail_hash = cocktails_array[index]
   cocktail = cocktail_hash['strDrink']
   cocktail_pic = cocktail_hash['strDrinkThumb']
+  # uploaded = Cloudinary::Uploader.upload(cocktail_pic)
   url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   list = open(url).read
   descriptions_hash = JSON.parse(list)
   descriptions_array = descriptions_hash['drinks']
   description_hash = descriptions_array[0]
   description = description_hash['strInstructions']
-  Cocktail.create(name: cocktail, picture: cocktail_pic, description: description)
+  @cocktail = Cocktail.new(name: cocktail, description: description)
+  @cocktail.remote_picture_url = cocktail_pic
+  @cocktail.save
 end
 puts 'Finished creating non-alcoholic cocktails. Enjoy!'
 

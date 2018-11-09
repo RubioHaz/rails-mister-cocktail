@@ -3,6 +3,8 @@
   <%= simple_form_for @cocktail, wrapper: :inline_form, html: { class: 'form-inline form-group-lg' } do |f| %>
     <%= f.input :name, class: 'input' %>
     <%= f.submit 'Create a cocktail', class: 'btn btn-primary btn-lg' %>
+    <%= f.input :picture %>
+    <%= f.input :picture_cache, as: :hidden %>
   <% end %>
   <hr>
   <%= link_to 'home', cocktails_path %>

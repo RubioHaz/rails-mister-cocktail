@@ -1,13 +1,28 @@
 <div class="container">
-  <h1>All Cocktails</h1>
+  <h1>NoOH Cocktails</h1>
   <p>
-    <%= link_to 'add your own', new_cocktail_path %>
+    <%= link_to 'add your own', new_cocktail_path, class: 'btn btn-primary btn-lg' %>
   </p>
-  <ul>
+  <div class="row">
     <% @cocktails.each do |cocktail| %>
-    <li>
-      <%= link_to cocktail.name, cocktail_path(cocktail) %>
-    </li>
-    <% end %>
-  </ul>
+    <div class="col-xs-6 col-sm-4 col-lg-3">
+      <div class="card-container">
+        <div class="card"
+          style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+                 url('<%= cl_image_path cocktail.picture %>');">
+          <div class="text-container">
+            <div class="card-category">
+              New
+            </div>
+            <div class="card-description">
+              <h3></h3>
+              <p></p>
+            </div>
+              <%= link_to cocktail.name, cocktail_path(cocktail), class: 'link' %>
+          </div>
+        </div>
+      </div>
+    </div>
+      <% end %>
+  </div>
 </div>
